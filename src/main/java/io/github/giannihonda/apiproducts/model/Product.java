@@ -1,11 +1,27 @@
 package io.github.giannihonda.apiproducts.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 //POJO - plain old java object
+
+@Entity
+@Table(name = "product") //exemplo se o nome fosse diferente
 public class Product {
 
+    @Id
+    @Column(name = "id") //exemplo se o nome fosse diferente, se aplica para todos os columns, que alias nao sao necessarios quando o nome e igual do db
     private String id;
+
+    @Column
     private String name;
+
+    @Column
     private String description;
+    
+    @Column
     private Double price;
 
     public String getId() {

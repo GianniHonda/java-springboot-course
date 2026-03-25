@@ -2,18 +2,16 @@ package io.github.giannihonda.apiproducts.controller;
 
 import io.github.giannihonda.apiproducts.model.Product;
 import io.github.giannihonda.apiproducts.repository.ProductRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("products")
 public class ProductController {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -28,5 +26,10 @@ public class ProductController {
 
         productRepository.save(product);
         return product;
+    }
+
+    @GetMapping("{id}")
+    public Product getById(@PathVariable("id") String id){
+        return productRepository.findById(id).orElse(null);
     }
 }
